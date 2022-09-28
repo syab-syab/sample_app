@@ -9,4 +9,8 @@ class User < ApplicationRecord
                               format: { with: VALID_EMAIL_REGEX },
                               # 一意性の検証(大文字小文字を区別しない)
                               uniqueness: { case_sensitive: false }
+  # セキュリティのためにパスワードをハッシュ化する
+  has_secure_password
+  # パスワードの存在性と最小文字数
+  validates :password, presence: true, length: { minimum: 6 }
 end
