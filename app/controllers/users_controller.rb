@@ -10,4 +10,16 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+
+  # /usersへのPOSTリクエストはcreateに送られる(route.rbの[resources :users]によって)
+  def create
+    # フォーム送信を受け取りUser.newで新規ユーザー作成
+    @user = User.new(params[:user])
+    # 作成の正否によって処理を分ける
+    if @user.save
+      # 
+    else
+      render 'new'
+    end
+  end
 end
