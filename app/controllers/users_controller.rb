@@ -14,12 +14,24 @@ class UsersController < ApplicationController
   # /usersへのPOSTリクエストはcreateに送られる(route.rbの[resources :users]によって)
   def create
     # フォーム送信を受け取りUser.newで新規ユーザー作成
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     # 作成の正否によって処理を分ける
     if @user.save
-      # 
+      # 初回のみ登録完了のメッセージを表示
+      flash[:success] = "Welcome to the Sample App!"
+      # 保存に成功したら対応するviewに飛ばす
+      # 下のコードはredirect_to user_url(@user)と同じ
+      redirect_to @user
     else
       render 'new'
     end
   end
+
+  # privateメソッドは外部から使えない
+  private
+
+    def user_params
+      # User.new(params[:user])だとユーザーが送信したデータをまるごとUser.newに渡すことになるので危険
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
 end

@@ -14,3 +14,6 @@ class User < ApplicationRecord
   # パスワードの存在性と最小文字数
   validates :password, presence: true, length: { minimum: 6 }
 end
+
+
+# テストデータのパスワードはすべて123456789
