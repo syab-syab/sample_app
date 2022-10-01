@@ -10,6 +10,10 @@ class SessionsController < ApplicationController
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
       # log_inはsessions_helperから
       log_in user
+      # チェックボックスがオンのときに'1'になり、オフのときに'0'
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      # rememberはuser.rbから
+      remember user
       redirect_to user
     else
       # エラーメッセージを作成する
@@ -19,8 +23,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # log_outメソッドはsessions_helperから
-    log_out
+    # log_out・logged_inともにsessions_helperから
+    log_out if logged_in?
     redirect_to root_url
   end
 end
