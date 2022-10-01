@@ -17,6 +17,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # 作成の正否によって処理を分ける
     if @user.save
+      # 登録が終わった直後に自動的にログイン
+      # log_inメソッドはsessions_helperから
+      log_in @user
       # 初回のみ登録完了のメッセージを表示
       flash[:success] = "Welcome to the Sample App!"
       # 保存に成功したら対応するviewに飛ばす
