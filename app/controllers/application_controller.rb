@@ -3,4 +3,16 @@ class ApplicationController < ActionController::Base
   # このファイルでsessionhelperをincludeすればどのコントローラでも使える
   # ApplicationControllerはすべてのコントローラーにも継承されているから
   include SessionsHelper
+
+  private
+
+    # ログイン済みユーザーかどうか確認
+    def logged_in_user
+      unless logged_in?
+        # store_locationはsessions_helperから
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
 end

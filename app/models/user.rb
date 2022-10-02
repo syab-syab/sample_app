@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # micropostsモデルと関連付け(多 → microposts)
+  # [dependent: :destroy]オプションを付けると
+  # userが消されたら紐づいているmicropostsもすべて消える
+  has_many :microposts, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
