@@ -86,6 +86,14 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  # 投稿した内容を見る
+  def feed
+    # whereメソッドで表示されているユーザーのマイクロポストをすべて取得
+    # 疑問符があることで、
+    # SQLクエリに代入する前にidがエスケープされてSQLインジェクションを防ぐ
+    Micropost.where("user_id = ?", id)
+  end
+
   private
 
     # メールアドレスをすべて小文字にする
