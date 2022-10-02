@@ -33,12 +33,16 @@ class UsersController < ApplicationController
     if @user.save
       # 登録が終わった直後に自動的にログイン
       # log_inメソッドはsessions_helperから
-      log_in @user
+      # log_in @user
       # 初回のみ登録完了のメッセージを表示
-      flash[:success] = "Welcome to the Sample App!"
+      # flash[:success] = "Welcome to the Sample App!"
       # 保存に成功したら対応するviewに飛ばす
       # 下のコードはredirect_to user_url(@user)と同じ
-      redirect_to @user
+      # redirect_to @user
+
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end

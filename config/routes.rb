@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
-  get 'users/new'
-
   # URL名 = '[コントローラー名]/[アクション名]'
   # httpメソッド 'URL'という感じ
   # rootでは'[コントローラー名]#[アクション名]'で指定可能
@@ -20,4 +16,5 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :users
+  resources :account_activations, only: [:edit]
 end
