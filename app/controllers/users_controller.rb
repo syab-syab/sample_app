@@ -40,6 +40,7 @@ class UsersController < ApplicationController
       # 下のコードはredirect_to user_url(@user)と同じ
       # redirect_to @user
 
+      # send_activation_emailはuser.rbから
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url

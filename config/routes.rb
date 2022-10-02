@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   # URL名 = '[コントローラー名]/[アクション名]'
   # httpメソッド 'URL'という感じ
   # rootでは'[コントローラー名]#[アクション名]'で指定可能
@@ -17,4 +21,5 @@ Rails.application.routes.draw do
 
   resources :users
   resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 end
