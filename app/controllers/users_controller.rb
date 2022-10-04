@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # before_actionを使って何らかの処理(indexとeditとupdateとdestroy)が実行される直前に
   # 特定のメソッドを実行する
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   # destroyアクションを行えるのは管理者権限を持つユーザーのみ
   before_action :admin_user,     only: :destroy
